@@ -2,11 +2,13 @@ package dev.viniduminsara.pahanaedu.business.customer.service.impl;
 
 import dev.viniduminsara.pahanaedu.business.customer.dto.CustomerDTO;
 import dev.viniduminsara.pahanaedu.business.customer.mapper.CustomerMapper;
+import dev.viniduminsara.pahanaedu.business.customer.model.Customer;
 import dev.viniduminsara.pahanaedu.business.customer.service.CustomerService;
 import dev.viniduminsara.pahanaedu.persistence.customer.dao.CustomerDAO;
 import dev.viniduminsara.pahanaedu.persistence.customer.dao.impl.CustomerDAOImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,17 +26,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO getCustomerById(String id) {
-        return null;
+        return CustomerMapper.toDTO(customerDAO.findById(id));
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return null;
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+        List<Customer> customerList = customerDAO.findAll();
+
+        for (Customer customer : customerList) {
+            customerDTOList.add(CustomerMapper.toDTO(customer));
+        }
+        return customerDTOList;
     }
 
     @Override
-    public void updateCustomer(String id, CustomerDTO updatedCustomer) {
-
+    public void updateCustomer(String id, CustomerDTO customerDTO) {
+        customerDAO.update(id, CustomerMapper.toEntity(customerDTO));
     }
 
     @Override
