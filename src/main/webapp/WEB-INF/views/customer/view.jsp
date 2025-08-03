@@ -17,11 +17,9 @@
             <table class="table table-zebra table-md">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
-                    <th>Address</th>
                     <th>Mobile</th>
-                    <th>Units</th>
+                    <th>Units Consumed</th>
                     <th>Email</th>
                     <th>Registered</th>
                     <th>Actions</th>
@@ -40,17 +38,17 @@
                     for (CustomerDTO customer : customers) {
                 %>
                 <tr>
-                    <td><%= customer.getCustomerId() %></td>
                     <td><%= customer.getName() %></td>
-                    <td><%= customer.getAddress() %></td>
                     <td><%= customer.getMobileNumber() %></td>
                     <td><%= customer.getUnitsConsumed() %></td>
                     <td><%= customer.getEmail() %></td>
                     <td><%= customer.getRegistrationDate() %></td>
                     <td>
                         <div class="flex space-x-2">
-                            <a href="editCustomer?id=<%= customer.getCustomerId() %>" class="btn btn-sm btn-primary btn-outline">Edit</a>
-                            <a href="deleteCustomer?id=<%= customer.getCustomerId() %>" class="btn btn-sm btn-secondary btn-outline">Delete</a>
+                            <a href="<%= request.getContextPath() %>/customer/edit?id=<%= customer.getCustomerId() %>"
+                               class="btn btn-sm btn-primary btn-outline"
+                            >Edit</a>
+                            <a class="btn btn-sm btn-secondary btn-outline">Delete</a>
                         </div>
                     </td>
                 </tr>

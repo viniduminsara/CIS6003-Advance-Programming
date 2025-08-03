@@ -3,7 +3,7 @@
     <ul class="menu bg-base-200 text-base-content min-h-full w-64 gap-2 p-4">
         <li>
             <a href="<%= request.getContextPath() %>/" class="flex items-center p-3 rounded-lg transition-all
-            <%= request.getRequestURI().endsWith("/") ? "text-primary" : "" %>
+            <%= request.getRequestURI().equals(request.getContextPath() + "/") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-house mr-3 text-xl"></i>
                 Dashboard
@@ -11,7 +11,7 @@
         </li>
         <li>
             <a href="<%= request.getContextPath() %>/customer" class="flex items-center p-3 rounded-lg transition-all
-            <%= request.getRequestURI().contains("/customer") ? "text-primary" : "" %>
+            <%= request.getRequestURI().equals(request.getContextPath() + "/customer") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-boxes-stacked mr-3 text-lg"></i>
                 Customers
@@ -19,7 +19,7 @@
         </li>
         <li>
             <a href="<%= request.getContextPath() %>/items" class="flex items-center p-3 rounded-lg transition-all
-            <%= request.getRequestURI().startsWith("/item") ? "text-primary" : "" %>
+            <%= request.getRequestURI().equals(request.getContextPath() + "/items") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-users mr-3 text-lg"></i>
                 Items
@@ -27,7 +27,7 @@
         </li>
         <li>
             <a href="<%= request.getContextPath() %>/orders" class="flex items-center p-3 rounded-lg transition-all
-            <%= request.getRequestURI().contains("/order") ? "text-primary" : "" %>
+            <%= request.getRequestURI().equals(request.getContextPath() + "/orders") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
                 Orders
