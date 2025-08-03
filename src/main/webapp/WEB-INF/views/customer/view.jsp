@@ -48,7 +48,9 @@
                             <a href="<%= request.getContextPath() %>/customer/edit?id=<%= customer.getCustomerId() %>"
                                class="btn btn-sm btn-primary btn-outline"
                             >Edit</a>
-                            <a class="btn btn-sm btn-secondary btn-outline">Delete</a>
+                            <form method="post" action="<%= request.getContextPath() %>/customer/delete?id=<%= customer.getCustomerId() %>" onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                                <button type="submit" class="btn btn-sm btn-secondary btn-outline">Delete</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
