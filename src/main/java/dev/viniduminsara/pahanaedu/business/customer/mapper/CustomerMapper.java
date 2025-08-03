@@ -4,6 +4,8 @@ import dev.viniduminsara.pahanaedu.business.customer.dto.CustomerDTO;
 import dev.viniduminsara.pahanaedu.business.customer.model.Customer;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class CustomerMapper {
@@ -43,5 +45,17 @@ public class CustomerMapper {
                 .mobileNumber(req.getParameter("mobileNumber"))
                 .email(req.getParameter("email"))
                 .build();
+    }
+
+    public static Customer mapToCustomer(ResultSet rs) throws SQLException {
+        return new Customer(
+            rs.getString("customer_id"),
+            rs.getString("name"),
+            rs.getString("address"),
+            rs.getString("mobile_number"),
+            rs.getInt("units_consumed"),
+            rs.getDate("registration_date").toLocalDate(),
+            rs.getString("email")
+        );
     }
 }
