@@ -11,9 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+import static dev.viniduminsara.pahanaedu.util.validation.Validation.validateCustomerDTO;
 
 @WebServlet(name = "customer", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
@@ -39,15 +39,17 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            CustomerDTO customerDTO = CustomerMapper.buildCustomerDTOFromRequest(req);
+        CustomerDTO customerDTO = CustomerMapper.buildCustomerDTOFromRequest(req);
+        String validationError = validateCustomerDTO(customerDTO);
+
+        if (validationError == null) {
             customerService.saveCustomer(customerDTO);
-
-            resp.sendRedirect(req.getContextPath() + "/customer");
-        } catch (Exception e) {
-            e.printStackTrace();
+            req.getSession().setAttribute("flash_success", "Customer created successfully!");
+        } else {
+            req.getSession().setAttribute("flash_error", validationError);
         }
-    }
 
+        resp.sendRedirect(req.getContextPath() + "/customer");
+    }
 
 }
