@@ -12,7 +12,7 @@ public interface CustomerDAO {
 
     List<Customer> findAll();
 
-    void update(Customer customer);
+    void update(String id, Customer customer);
 
     void delete(String id);
 
