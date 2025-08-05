@@ -18,7 +18,7 @@
             </a>
         </li>
         <li>
-            <a href="<%= request.getContextPath() %>/items" class="flex items-center p-3 rounded-lg transition-all
+            <a href="<%= request.getContextPath() %>/item" class="flex items-center p-3 rounded-lg transition-all
             <%= request.getRequestURI().equals(request.getContextPath() + "/items") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-users mr-3 text-lg"></i>
@@ -26,7 +26,7 @@
             </a>
         </li>
         <li>
-            <a href="<%= request.getContextPath() %>/orders" class="flex items-center p-3 rounded-lg transition-all
+            <a href="<%= request.getContextPath() %>/order" class="flex items-center p-3 rounded-lg transition-all
             <%= request.getRequestURI().equals(request.getContextPath() + "/orders") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
