@@ -23,7 +23,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDTO getItemByCode(String itemCode) {
-        return null;
+        return ItemMapper.toDTO(itemDAO.findById(itemCode));
     }
 
     @Override
@@ -37,12 +37,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void updateItem(String itemCode, ItemDTO updatedItem) {
-
+    public void updateItem(String itemCode, ItemDTO itemDTO) {
+        itemDAO.update(itemCode, ItemMapper.toEntity(itemDTO));
     }
 
     @Override
     public void deleteItem(String itemCode) {
-
+        itemDAO.delete(itemCode);
     }
 }

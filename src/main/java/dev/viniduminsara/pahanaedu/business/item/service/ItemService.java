@@ -12,7 +12,7 @@ public interface ItemService {
 
     List<ItemDTO> getAllItems();
 
-    void updateItem(String itemCode, ItemDTO updatedItem);
+    void updateItem(String itemCode, ItemDTO itemDTO);
 
     void deleteItem(String itemCode);
 }
