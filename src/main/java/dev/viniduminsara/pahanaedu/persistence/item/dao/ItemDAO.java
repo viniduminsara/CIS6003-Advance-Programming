@@ -16,4 +16,6 @@ public interface ItemDAO {
 
     void delete(String itemCode);
 
+    int getCount();
+
 }
