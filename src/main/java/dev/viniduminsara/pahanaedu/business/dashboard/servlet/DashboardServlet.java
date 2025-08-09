@@ -30,8 +30,10 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int customerCount = customerService.getCustomerCount();
         int itemCount = itemService.getItemCount();
 
+        req.setAttribute("customerCount", customerCount);
         req.setAttribute("itemCount", itemCount);
         req.setAttribute("pageTitle", "Pahana Edu Billing System");
         req.setAttribute("body", "../dashboard/view.jsp");

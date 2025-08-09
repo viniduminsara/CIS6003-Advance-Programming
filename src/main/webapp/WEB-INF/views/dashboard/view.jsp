@@ -11,7 +11,7 @@
             <span>Total Customers</span>
             <span class="text-purple-400 text-xl"><i class="fa-solid fa-people-group"></i></span>
         </div>
-        <h2 class="text-2xl font-semibold mt-2"><%= 1 %>
+        <h2 class="text-2xl font-semibold mt-2"><%= request.getAttribute("customerCount") %>
         </h2>
     </div>
     <div class="bg-neutral rounded-box py-4 px-6">
