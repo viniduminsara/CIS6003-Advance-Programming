@@ -15,4 +15,7 @@ public interface ItemService {
     void updateItem(String itemCode, ItemDTO itemDTO);
 
     void deleteItem(String itemCode);
+
+    int getItemCount();
+
 }

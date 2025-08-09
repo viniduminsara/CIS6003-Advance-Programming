@@ -16,4 +16,6 @@ public interface CustomerDAO {
 
     void delete(String id);
 
+    int getCount();
+
 }
