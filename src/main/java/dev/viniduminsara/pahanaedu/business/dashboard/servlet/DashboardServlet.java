@@ -32,9 +32,11 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int customerCount = customerService.getCustomerCount();
         int itemCount = itemService.getItemCount();
+        int orderCount = orderService.getOrderCount();
 
         req.setAttribute("customerCount", customerCount);
         req.setAttribute("itemCount", itemCount);
+        req.setAttribute("orderCount", orderCount);
         req.setAttribute("pageTitle", "Pahana Edu Billing System");
         req.setAttribute("body", "../dashboard/view.jsp");
 

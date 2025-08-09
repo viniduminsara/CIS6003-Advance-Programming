@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setDate(LocalDate.now());
         return orderDAO.save(OrderMapper.toEntity(orderDTO));
     }
+
+    @Override
+    public int getOrderCount() {
+        return orderDAO.getCount();
+    }
 }

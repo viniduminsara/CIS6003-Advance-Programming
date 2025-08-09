@@ -27,7 +27,7 @@
             <span>Total Bills</span>
             <span class="text-primary text-xl"><i class="fa-solid fa-file"></i></span>
         </div>
-        <h2 class="text-2xl font-semibold mt-2"><%= 1 %>
+        <h2 class="text-2xl font-semibold mt-2"><%= request.getAttribute("orderCount") %>
         </h2>
     </div>
 </div>
