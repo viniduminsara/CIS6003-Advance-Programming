@@ -1,19 +1,19 @@
-package dev.viniduminsara.pahanaedu.business.order.model;
+package dev.viniduminsara.pahanaedu.business.bill.model;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Order {
+public class Bill {
 
     private String orderId;
-    private List<OrderItem> orderItems;
+    private List<BillItem> billItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
-    private Order(Builder builder) {
+    private Bill(Builder builder) {
         this.orderId = builder.orderId;
-        this.orderItems = builder.orderItems;
+        this.billItems = builder.billItems;
         this.totalAmount = builder.totalAmount;
         this.customerId = builder.customerId;
         this.date = builder.date;
@@ -21,38 +21,38 @@ public class Order {
 
     public static class Builder {
         private String orderId;
-        private List<OrderItem> orderItems;
+        private List<BillItem> billItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
 
-        public Builder setOrderId(String orderId) {
+        public Builder orderId(String orderId) {
             this.orderId = orderId;
             return this;
         }
 
-        public Builder setOrderItems(List<OrderItem> orderItems) {
-            this.orderItems = orderItems;
+        public Builder orderItems(List<BillItem> billItems) {
+            this.billItems = billItems;
             return this;
         }
 
-        public Builder setTotalAmount(Double totalAmount) {
+        public Builder totalAmount(Double totalAmount) {
             this.totalAmount = totalAmount;
             return this;
         }
 
-        public Builder setCustomerId(String customerId) {
+        public Builder customerId(String customerId) {
             this.customerId = customerId;
             return this;
         }
 
-        public Builder setDate(LocalDate date) {
+        public Builder date(LocalDate date) {
             this.date = date;
             return this;
         }
 
-        public Order build() {
-            return new Order(this);
+        public Bill build() {
+            return new Bill(this);
         }
     }
 
@@ -64,12 +64,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public List<BillItem> getOrderItems() {
+        return billItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderItems(List<BillItem> billItems) {
+        this.billItems = billItems;
     }
 
     public Double getTotalAmount() {
@@ -98,9 +98,9 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Bill{" +
                 "orderId='" + orderId + '\'' +
-                ", orderItems=" + orderItems +
+                ", orderItems=" + billItems +
                 ", totalAmount=" + totalAmount +
                 ", customerId='" + customerId + '\'' +
                 ", date=" + date +

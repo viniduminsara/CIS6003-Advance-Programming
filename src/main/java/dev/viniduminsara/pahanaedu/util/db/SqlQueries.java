@@ -20,6 +20,9 @@ public class SqlQueries {
 
         public static final String COUNT =
             "SELECT COUNT(*) FROM customer";
+
+        public static final String UPDATE_UNIT_CONSUMED =
+            "UPDATE customer SET units_consumed = units_consumed + ? WHERE customer_id = ?";
     }
 
     public static final class Item {
@@ -40,19 +43,25 @@ public class SqlQueries {
 
         public static final String COUNT =
             "SELECT COUNT(*) FROM item";
+
+        public static final String UPDATE_STOCK =
+            "UPDATE item SET stock_quantity = stock_quantity - ? WHERE item_code = ?";
     }
 
-    public static final class Order {
+    public static final class Bill {
         public static final String INSERT =
-                "INSERT INTO orders (order_id, order_date, customer_id, total_amount) VALUES (?, ?, ?, ?)";
+                "INSERT INTO bill (bill_id, bill_date, customer_id, total_amount) VALUES (?, ?, ?, ?)";
 
         public static final String COUNT =
-            "SELECT COUNT(*) FROM orders";
+            "SELECT COUNT(*) FROM bill";
+
+        public static final String FIND_ALL =
+            "SELECT * FROM bill";
     }
 
-    public static final class OrderItem {
+    public static final class BillItem {
         public static final String INSERT =
-                "INSERT INTO order_item (order_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
+                "INSERT INTO bill_item (bill_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
     }
 
     public static final class User {

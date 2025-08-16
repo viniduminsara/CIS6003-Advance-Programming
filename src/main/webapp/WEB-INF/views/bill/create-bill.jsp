@@ -9,16 +9,15 @@
 %>
 
 <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Place Order</h1>
+    <h1 class="text-3xl font-bold">Create New Bill</h1>
     <div></div>
 </div>
 
-<form id="orderForm" action="<%= request.getContextPath() %>/order" method="post"
+<form id="orderForm" action="<%= request.getContextPath() %>/bill/create" method="post"
       class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     <!-- Create New Bill Form -->
     <div class="col-span-2 bg-base-100 p-6 rounded-box shadow-lg">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">Create New Bill</h2>
 
         <!-- Select Customer -->
         <div class="form-control w-full mb-4">
@@ -98,12 +97,6 @@
             <button type="button" class="btn btn-primary mt-6 w-full" onclick="submitOrder()">
                 <i class="fa-solid fa-cart-shopping"></i> Create Bill
             </button>
-        </div>
-
-        <!-- Recent Bills -->
-        <div class="bg-base-100 p-6 rounded-box shadow-lg">
-            <h3 class="text-lg font-semibold mb-2">Recent Bills</h3>
-            <p class="text-sm text-gray-400">No bills created yet</p>
         </div>
     </div>
 

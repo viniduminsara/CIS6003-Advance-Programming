@@ -1,12 +1,12 @@
-package dev.viniduminsara.pahanaedu.business.order.model;
+package dev.viniduminsara.pahanaedu.business.bill.model;
 
 
-public class OrderItem {
+public class BillItem {
     private String itemCode;
     private Integer quantity;
     private Double unitPrice;
 
-    private OrderItem(Builder builder) {
+    private BillItem(Builder builder) {
         this.itemCode = builder.itemCode;
         this.quantity = builder.quantity;
         this.unitPrice = builder.unitPrice;
@@ -32,8 +32,8 @@ public class OrderItem {
             return this;
         }
 
-        public OrderItem build() {
-            return new OrderItem(this);
+        public BillItem build() {
+            return new BillItem(this);
         }
     }
 

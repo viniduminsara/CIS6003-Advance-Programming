@@ -13,7 +13,7 @@
             <a href="<%= request.getContextPath() %>/customer" class="flex items-center p-3 rounded-lg transition-all
             <%= request.getRequestURI().equals(request.getContextPath() + "/customer") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
-                <i class="fa-solid fa-boxes-stacked mr-3 text-lg"></i>
+                <i class="fa-solid fa-users mr-3 text-lg"></i>
                 Customers
             </a>
         </li>
@@ -21,16 +21,24 @@
             <a href="<%= request.getContextPath() %>/item" class="flex items-center p-3 rounded-lg transition-all
             <%= request.getRequestURI().equals(request.getContextPath() + "/items") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
-                <i class="fa-solid fa-users mr-3 text-lg"></i>
+                <i class="fa-solid fa-boxes-stacked mr-3 text-lg"></i>
                 Items
             </a>
         </li>
         <li>
-            <a href="<%= request.getContextPath() %>/order" class="flex items-center p-3 rounded-lg transition-all
-            <%= request.getRequestURI().equals(request.getContextPath() + "/orders") ? "text-primary" : "" %>
+            <a href="<%= request.getContextPath() %>/bill/create" class="flex items-center p-3 rounded-lg transition-all
+            <%= request.getRequestURI().equals(request.getContextPath() + "/bill/create") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
-                Orders
+                Create Bill
+            </a>
+        </li>
+        <li>
+            <a href="<%= request.getContextPath() %>/bill" class="flex items-center p-3 rounded-lg transition-all
+            <%= request.getRequestURI().equals(request.getContextPath() + "/bill") ? "text-primary" : "" %>
+                focus:text-primary active:text-primary">
+                <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
+                Bills Overview
             </a>
         </li>
     </ul>

@@ -1,17 +1,17 @@
-package dev.viniduminsara.pahanaedu.business.order.dto;
+package dev.viniduminsara.pahanaedu.business.bill.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class OrderDTO {
+public class BillDTO {
 
     private String orderId;
-    private List<OrderItemDTO> orderItems;
+    private List<BillItemDTO> orderItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
-    private OrderDTO(Builder builder) {
+    private BillDTO(Builder builder) {
         this.orderId = builder.orderId;
         this.orderItems = builder.orderItems;
         this.totalAmount = builder.totalAmount;
@@ -21,7 +21,7 @@ public class OrderDTO {
 
     public static class Builder {
         private String orderId;
-        private List<OrderItemDTO> orderItems;
+        private List<BillItemDTO> orderItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
@@ -31,7 +31,7 @@ public class OrderDTO {
             return this;
         }
 
-        public Builder setOrderItems(List<OrderItemDTO> orderItems) {
+        public Builder setOrderItems(List<BillItemDTO> orderItems) {
             this.orderItems = orderItems;
             return this;
         }
@@ -51,8 +51,8 @@ public class OrderDTO {
             return this;
         }
 
-        public OrderDTO build() {
-            return new OrderDTO(this);
+        public BillDTO build() {
+            return new BillDTO(this);
         }
     }
 
@@ -64,11 +64,11 @@ public class OrderDTO {
         this.orderId = orderId;
     }
 
-    public List<OrderItemDTO> getOrderItems() {
+    public List<BillItemDTO> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItemDTO> orderItems) {
+    public void setOrderItems(List<BillItemDTO> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -98,7 +98,7 @@ public class OrderDTO {
 
     @Override
     public String toString() {
-        return "OrderDTO{" +
+        return "BillDTO{" +
                 "orderId='" + orderId + '\'' +
                 ", orderItems=" + orderItems +
                 ", totalAmount=" + totalAmount +
