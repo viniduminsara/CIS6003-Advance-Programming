@@ -17,6 +17,9 @@ public class SqlQueries {
 
         public static final String DELETE =
             "DELETE FROM customer WHERE customer_id = ?";
+
+        public static final String COUNT =
+            "SELECT COUNT(*) FROM customer";
     }
 
     public static final class Item {
@@ -34,16 +37,27 @@ public class SqlQueries {
 
         public static final String DELETE =
             "DELETE FROM item WHERE item_code = ?";
+
+        public static final String COUNT =
+            "SELECT COUNT(*) FROM item";
     }
 
     public static final class Order {
         public static final String INSERT =
                 "INSERT INTO orders (order_id, order_date, customer_id, total_amount) VALUES (?, ?, ?, ?)";
+
+        public static final String COUNT =
+            "SELECT COUNT(*) FROM orders";
     }
 
     public static final class OrderItem {
         public static final String INSERT =
                 "INSERT INTO order_item (order_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
+    }
+
+    public static final class User {
+        public static final String FIND_BY_USERNAME_AND_PASSWORD =
+                "SELECT * FROM user WHERE username = ? AND password = ?";
     }
 
 }

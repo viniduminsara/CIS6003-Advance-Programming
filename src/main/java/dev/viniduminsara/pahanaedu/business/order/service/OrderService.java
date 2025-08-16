@@ -6,4 +6,6 @@ public interface OrderService {
 
     boolean saveOrder(OrderDTO orderDTO);
 
+    int getOrderCount();
+
 }

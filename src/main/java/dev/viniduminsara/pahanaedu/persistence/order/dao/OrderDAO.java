@@ -6,4 +6,6 @@ public interface OrderDAO {
 
     boolean save(Order order);
 
+    int getCount();
+
 }

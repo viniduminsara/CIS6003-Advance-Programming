@@ -6,10 +6,7 @@ import dev.viniduminsara.pahanaedu.persistence.order.dao.OrderDAO;
 import dev.viniduminsara.pahanaedu.util.db.DBConnection;
 import dev.viniduminsara.pahanaedu.util.db.SqlQueries;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class OrderDAOImpl implements OrderDAO {
 
@@ -64,5 +61,22 @@ public class OrderDAOImpl implements OrderDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public int getCount() {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Order.COUNT)
+        ) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -16,4 +16,6 @@ public interface CustomerService {
 
     void deleteCustomer(String id);
 
+    int getCustomerCount();
+
 }

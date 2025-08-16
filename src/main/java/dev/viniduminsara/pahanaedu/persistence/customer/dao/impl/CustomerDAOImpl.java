@@ -97,4 +97,21 @@ try (
             e.printStackTrace();
         }
     }
+
+    @Override
+    public int getCount() {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.COUNT)
+        ) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
