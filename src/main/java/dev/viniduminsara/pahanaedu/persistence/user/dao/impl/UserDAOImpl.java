@@ -22,6 +22,7 @@ public class UserDAOImpl implements UserDAO {
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
                     return new User.Builder()
+                            .userId(rs.getString("user_id"))
                             .username(rs.getString("username"))
                             .fullName(rs.getString("full_name"))
                             .contactNumber(rs.getString("contact_number"))

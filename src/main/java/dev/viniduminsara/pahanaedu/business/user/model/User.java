@@ -1,6 +1,7 @@
 package dev.viniduminsara.pahanaedu.business.user.model;
 
 public class User {
+    private String userId;
     private String username;
     private String password;
     private String fullName;
@@ -8,6 +9,7 @@ public class User {
     private String email;
 
     private User(Builder builder) {
+        this.userId = builder.userId;
         this.username = builder.username;
         this.password = builder.password;
         this.fullName = builder.fullName;
@@ -16,11 +18,17 @@ public class User {
     }
 
     public static class Builder {
+        private String userId;
         private String username;
         private String password;
         private String fullName;
         private String contactNumber;
         private String email;
+
+        public Builder userId(String userId) {
+            this.userId = userId;
+            return this;
+        }
 
         public Builder username(String username) {
             this.username = username;
@@ -50,6 +58,14 @@ public class User {
         public User build() {
             return new User(this);
         }
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

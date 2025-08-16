@@ -10,6 +10,7 @@ public class UserMapper {
             return null;
         }
         return new User.Builder()
+                .userId(dto.getUserId())
                 .username(dto.getUsername())
                 .password(dto.getPassword())
                 .fullName(dto.getFullName())
@@ -23,6 +24,7 @@ public class UserMapper {
             return null;
         }
         return new UserDTO.Builder()
+                .userId(entity.getUserId())
                 .username(entity.getUsername())
                 .password(entity.getPassword())
                 .fullName(entity.getFullName())

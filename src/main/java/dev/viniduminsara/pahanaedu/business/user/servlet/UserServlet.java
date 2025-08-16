@@ -40,9 +40,8 @@ public class UserServlet extends HttpServlet {
 
         UserDTO user = userService.findUserByUsernameAndPassword(username, password);
 
-        System.out.println(user);
         if (user != null) {
-            req.getSession().setAttribute("username", username);
+            req.getSession().setAttribute("user", user.getUserId());
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.getSession().setAttribute("flash_error", "Invalid username or password.");
