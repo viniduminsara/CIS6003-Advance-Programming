@@ -54,6 +54,9 @@ public class SqlQueries {
 
         public static final String COUNT =
             "SELECT COUNT(*) FROM bill";
+
+        public static final String FIND_ALL =
+            "SELECT * FROM bill";
     }
 
     public static final class BillItem {

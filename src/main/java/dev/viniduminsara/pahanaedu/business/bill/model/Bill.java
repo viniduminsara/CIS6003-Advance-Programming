@@ -26,27 +26,27 @@ public class Bill {
         private String customerId;
         private LocalDate date;
 
-        public Builder setOrderId(String orderId) {
+        public Builder orderId(String orderId) {
             this.orderId = orderId;
             return this;
         }
 
-        public Builder setOrderItems(List<BillItem> billItems) {
+        public Builder orderItems(List<BillItem> billItems) {
             this.billItems = billItems;
             return this;
         }
 
-        public Builder setTotalAmount(Double totalAmount) {
+        public Builder totalAmount(Double totalAmount) {
             this.totalAmount = totalAmount;
             return this;
         }
 
-        public Builder setCustomerId(String customerId) {
+        public Builder customerId(String customerId) {
             this.customerId = customerId;
             return this;
         }
 
-        public Builder setDate(LocalDate date) {
+        public Builder date(LocalDate date) {
             this.date = date;
             return this;
         }

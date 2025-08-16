@@ -3,7 +3,7 @@
 <%@ page import="dev.viniduminsara.pahanaedu.business.bill.dto.BillDTO" %>
 
 <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Bill Overview</h1>
+    <h1 class="text-3xl font-bold">Bills Overview</h1>
     <a href="<%= request.getContextPath() %>/bill/create" class="btn btn-primary mb-4">Create Bill</a>
 </div>
 

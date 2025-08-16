@@ -7,6 +7,8 @@ import dev.viniduminsara.pahanaedu.util.db.DBConnection;
 import dev.viniduminsara.pahanaedu.util.db.SqlQueries;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BillDAOImpl implements BillDAO {
 
@@ -101,5 +103,27 @@ public class BillDAOImpl implements BillDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public List<Bill> findAll() {
+        List<Bill> bills = new ArrayList<>();
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Bill.FIND_ALL);
+            ResultSet rs = pstm.executeQuery()
+        ) {
+            while (rs.next()) {
+                bills.add(new Bill.Builder()
+                        .orderId(rs.getString("bill_id"))
+                        .date(rs.getDate("bill_date").toLocalDate())
+                        .customerId(rs.getString("customer_id"))
+                        .totalAmount(rs.getDouble("total_amount"))
+                        .build());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bills;
     }
 }

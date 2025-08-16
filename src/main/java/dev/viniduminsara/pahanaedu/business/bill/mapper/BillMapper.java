@@ -12,10 +12,16 @@ public class BillMapper {
     public static BillDTO toDTO(Bill bill) {
         if (bill == null) return null;
 
-        List<BillItemDTO> itemDTOs = bill.getOrderItems()
-                .stream()
-                .map(BillMapper::toItemDTO)
-                .collect(Collectors.toList());
+
+        List<BillItemDTO> itemDTOs;
+        if (bill.getOrderItems() != null) {
+            itemDTOs = bill.getOrderItems()
+                    .stream()
+                    .map(BillMapper::toItemDTO)
+                    .collect(Collectors.toList());
+        } else {
+            itemDTOs = null;
+        }
 
         return new BillDTO.Builder()
                 .setOrderId(bill.getOrderId())
@@ -29,17 +35,22 @@ public class BillMapper {
     public static Bill toEntity(BillDTO dto) {
         if (dto == null) return null;
 
-        List<BillItem> items = dto.getOrderItems()
-                .stream()
-                .map(BillMapper::toItemEntity)
-                .collect(Collectors.toList());
+        List<BillItem> items;
+        if (dto.getOrderItems() != null) {
+            items = dto.getOrderItems()
+                    .stream()
+                    .map(BillMapper::toItemEntity)
+                    .collect(Collectors.toList());
+        } else {
+            items = null;
+        }
 
         return new Bill.Builder()
-                .setOrderId(dto.getOrderId())
-                .setCustomerId(dto.getCustomerId())
-                .setDate(dto.getDate())
-                .setTotalAmount(dto.getTotalAmount())
-                .setOrderItems(items)
+                .orderId(dto.getOrderId())
+                .customerId(dto.getCustomerId())
+                .date(dto.getDate())
+                .totalAmount(dto.getTotalAmount())
+                .orderItems(items)
                 .build();
     }
 
