@@ -17,11 +17,11 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerDAO customerDAO = new CustomerDAOImpl();
 
     @Override
-    public void saveCustomer(CustomerDTO customerDTO) {
+    public boolean saveCustomer(CustomerDTO customerDTO) {
         customerDTO.setCustomerId(UUID.randomUUID().toString());
         customerDTO.setRegistrationDate(LocalDate.now());
         customerDTO.setUnitsConsumed(0);
-        customerDAO.save(CustomerMapper.toEntity(customerDTO));
+        return customerDAO.save(CustomerMapper.toEntity(customerDTO));
     }
 
     @Override
@@ -41,17 +41,27 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(String id, CustomerDTO customerDTO) {
-        customerDAO.update(id, CustomerMapper.toEntity(customerDTO));
+    public boolean updateCustomer(String id, CustomerDTO customerDTO) {
+        return customerDAO.update(id, CustomerMapper.toEntity(customerDTO));
     }
 
     @Override
-    public void deleteCustomer(String id) {
-        customerDAO.delete(id);
+    public boolean deleteCustomer(String id) {
+        return customerDAO.delete(id);
     }
 
     @Override
     public int getCustomerCount() {
         return customerDAO.getCount();
+    }
+
+    @Override
+    public boolean checkEmailExists(String email) {
+        return customerDAO.checkEmailExists(email);
+    }
+
+    @Override
+    public boolean checkMobileNumberExists(String mobileNumber) {
+        return customerDAO.checkMobileNumberExists(mobileNumber);
     }
 }

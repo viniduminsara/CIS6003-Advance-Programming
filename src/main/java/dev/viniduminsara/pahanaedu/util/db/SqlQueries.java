@@ -23,6 +23,12 @@ public class SqlQueries {
 
         public static final String UPDATE_UNIT_CONSUMED =
             "UPDATE customer SET units_consumed = units_consumed + ? WHERE customer_id = ?";
+
+        public static final String EXISTS_BY_EMAIL =
+            "SELECT COUNT(*) FROM customer WHERE email = ?";
+
+        public static final String EXISTS_BY_MOBILE_NUMBER =
+            "SELECT COUNT(*) FROM customer WHERE mobile_number = ?";
     }
 
     public static final class Item {

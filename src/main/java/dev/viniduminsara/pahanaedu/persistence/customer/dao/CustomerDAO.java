@@ -6,16 +6,20 @@ import java.util.List;
 
 public interface CustomerDAO {
 
-    void save(Customer customer);
+    boolean save(Customer customer);
 
     Customer findById(String id);
 
     List<Customer> findAll();
 
-    void update(String id, Customer customer);
+    boolean update(String id, Customer customer);
 
-    void delete(String id);
+    boolean delete(String id);
 
     int getCount();
+
+    boolean checkEmailExists(String email);
+
+    boolean checkMobileNumberExists(String mobileNumber);
 
 }
