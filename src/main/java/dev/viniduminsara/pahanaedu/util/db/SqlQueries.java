@@ -20,6 +20,9 @@ public class SqlQueries {
 
         public static final String COUNT =
             "SELECT COUNT(*) FROM customer";
+
+        public static final String UPDATE_UNIT_CONSUMED =
+            "UPDATE customer SET units_consumed = units_consumed + ? WHERE customer_id = ?";
     }
 
     public static final class Item {
@@ -40,6 +43,9 @@ public class SqlQueries {
 
         public static final String COUNT =
             "SELECT COUNT(*) FROM item";
+
+        public static final String UPDATE_STOCK =
+            "UPDATE item SET stock_quantity = stock_quantity - ? WHERE item_code = ?";
     }
 
     public static final class Order {

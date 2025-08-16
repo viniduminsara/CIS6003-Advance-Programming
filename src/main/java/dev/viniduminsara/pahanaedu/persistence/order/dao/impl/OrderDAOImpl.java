@@ -15,6 +15,8 @@ public class OrderDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement orderPstm = null;
         PreparedStatement orderItemPstm = null;
+        PreparedStatement updateStockPstm = null;
+        PreparedStatement updateCustomerPstm = null;
 
         try {
             connection = DBConnection.getInstance().getConnection();
@@ -30,15 +32,34 @@ public class OrderDAOImpl implements OrderDAO {
 
             // Insert order items into `order_item` table
             orderItemPstm = connection.prepareStatement(SqlQueries.OrderItem.INSERT);
+
+            // Prepare stock update statement
+            updateStockPstm = connection.prepareStatement(SqlQueries.Item.UPDATE_STOCK);
+
+            int totalUnits = 0;
             for (OrderItem item : order.getOrderItems()) {
                 orderItemPstm.setString(1, order.getOrderId());
                 orderItemPstm.setString(2, item.getItemCode());
                 orderItemPstm.setInt(3, item.getQuantity());
                 orderItemPstm.setDouble(4, item.getUnitPrice());
                 orderItemPstm.addBatch();
+
+                updateStockPstm.setInt(1, item.getQuantity());
+                updateStockPstm.setString(2, item.getItemCode());
+                updateStockPstm.addBatch();
+
+                totalUnits += item.getQuantity();
             }
 
-            orderItemPstm.executeBatch(); // Execute all item insertions
+            orderItemPstm.executeBatch();
+            updateStockPstm.executeBatch();
+
+            // Update customer's units_consumed
+            updateCustomerPstm = connection.prepareStatement(SqlQueries.Customer.UPDATE_UNIT_CONSUMED);
+            updateCustomerPstm.setInt(1, totalUnits);
+            updateCustomerPstm.setString(2, order.getCustomerId());
+            updateCustomerPstm.executeUpdate();
+
             connection.commit(); // Commit transaction
             return true;
 
@@ -56,6 +77,8 @@ public class OrderDAOImpl implements OrderDAO {
             try {
                 if (orderPstm != null) orderPstm.close();
                 if (orderItemPstm != null) orderItemPstm.close();
+                if (updateStockPstm != null) updateStockPstm.close();
+                if (updateCustomerPstm != null) updateCustomerPstm.close();
                 if (connection != null) connection.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
