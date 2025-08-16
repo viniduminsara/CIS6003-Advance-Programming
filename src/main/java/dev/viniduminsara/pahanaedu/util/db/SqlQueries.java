@@ -48,17 +48,17 @@ public class SqlQueries {
             "UPDATE item SET stock_quantity = stock_quantity - ? WHERE item_code = ?";
     }
 
-    public static final class Order {
+    public static final class Bill {
         public static final String INSERT =
-                "INSERT INTO orders (order_id, order_date, customer_id, total_amount) VALUES (?, ?, ?, ?)";
+                "INSERT INTO bill (bill_id, bill_date, customer_id, total_amount) VALUES (?, ?, ?, ?)";
 
         public static final String COUNT =
-            "SELECT COUNT(*) FROM orders";
+            "SELECT COUNT(*) FROM bill";
     }
 
-    public static final class OrderItem {
+    public static final class BillItem {
         public static final String INSERT =
-                "INSERT INTO order_item (order_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
+                "INSERT INTO bill_item (bill_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
     }
 
     public static final class User {

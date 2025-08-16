@@ -1,11 +1,11 @@
-package dev.viniduminsara.pahanaedu.business.order.dto;
+package dev.viniduminsara.pahanaedu.business.bill.dto;
 
-public class OrderItemDTO {
+public class BillItemDTO {
     private String itemCode;
     private Integer quantity;
     private Double unitPrice;
 
-    private OrderItemDTO(Builder builder) {
+    private BillItemDTO(Builder builder) {
         this.itemCode = builder.itemCode;
         this.quantity = builder.quantity;
         this.unitPrice = builder.unitPrice;
@@ -31,8 +31,8 @@ public class OrderItemDTO {
             return this;
         }
 
-        public OrderItemDTO build() {
-            return new OrderItemDTO(this);
+        public BillItemDTO build() {
+            return new BillItemDTO(this);
         }
     }
 

@@ -1,19 +1,19 @@
-package dev.viniduminsara.pahanaedu.business.order.dto;
+package dev.viniduminsara.pahanaedu.business.bill.model;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class OrderDTO {
+public class Bill {
 
     private String orderId;
-    private List<OrderItemDTO> orderItems;
+    private List<BillItem> billItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
-    private OrderDTO(Builder builder) {
+    private Bill(Builder builder) {
         this.orderId = builder.orderId;
-        this.orderItems = builder.orderItems;
+        this.billItems = builder.billItems;
         this.totalAmount = builder.totalAmount;
         this.customerId = builder.customerId;
         this.date = builder.date;
@@ -21,7 +21,7 @@ public class OrderDTO {
 
     public static class Builder {
         private String orderId;
-        private List<OrderItemDTO> orderItems;
+        private List<BillItem> billItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
@@ -31,8 +31,8 @@ public class OrderDTO {
             return this;
         }
 
-        public Builder setOrderItems(List<OrderItemDTO> orderItems) {
-            this.orderItems = orderItems;
+        public Builder setOrderItems(List<BillItem> billItems) {
+            this.billItems = billItems;
             return this;
         }
 
@@ -51,8 +51,8 @@ public class OrderDTO {
             return this;
         }
 
-        public OrderDTO build() {
-            return new OrderDTO(this);
+        public Bill build() {
+            return new Bill(this);
         }
     }
 
@@ -64,12 +64,12 @@ public class OrderDTO {
         this.orderId = orderId;
     }
 
-    public List<OrderItemDTO> getOrderItems() {
-        return orderItems;
+    public List<BillItem> getOrderItems() {
+        return billItems;
     }
 
-    public void setOrderItems(List<OrderItemDTO> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderItems(List<BillItem> billItems) {
+        this.billItems = billItems;
     }
 
     public Double getTotalAmount() {
@@ -98,9 +98,9 @@ public class OrderDTO {
 
     @Override
     public String toString() {
-        return "OrderDTO{" +
+        return "Bill{" +
                 "orderId='" + orderId + '\'' +
-                ", orderItems=" + orderItems +
+                ", orderItems=" + billItems +
                 ", totalAmount=" + totalAmount +
                 ", customerId='" + customerId + '\'' +
                 ", date=" + date +

@@ -43,7 +43,7 @@
             <i class="fa-solid fa-box text-3xl mb-2"></i>
             Add New Item
         </a>
-        <a class="bg-base-200 flex flex-col justify-center items-center rounded-box py-8" href="<%= request.getContextPath() %>/order">
+        <a class="bg-base-200 flex flex-col justify-center items-center rounded-box py-8" href="<%= request.getContextPath() %>/bill/create">
             <i class="fa-solid fa-money-bills text-3xl mb-2"></i>
             Create Bill
         </a>

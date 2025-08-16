@@ -1,17 +1,17 @@
-package dev.viniduminsara.pahanaedu.business.order.model;
+package dev.viniduminsara.pahanaedu.business.bill.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Order {
+public class BillDTO {
 
     private String orderId;
-    private List<OrderItem> orderItems;
+    private List<BillItemDTO> orderItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
-    private Order(Builder builder) {
+    private BillDTO(Builder builder) {
         this.orderId = builder.orderId;
         this.orderItems = builder.orderItems;
         this.totalAmount = builder.totalAmount;
@@ -21,7 +21,7 @@ public class Order {
 
     public static class Builder {
         private String orderId;
-        private List<OrderItem> orderItems;
+        private List<BillItemDTO> orderItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
@@ -31,7 +31,7 @@ public class Order {
             return this;
         }
 
-        public Builder setOrderItems(List<OrderItem> orderItems) {
+        public Builder setOrderItems(List<BillItemDTO> orderItems) {
             this.orderItems = orderItems;
             return this;
         }
@@ -51,8 +51,8 @@ public class Order {
             return this;
         }
 
-        public Order build() {
-            return new Order(this);
+        public BillDTO build() {
+            return new BillDTO(this);
         }
     }
 
@@ -64,11 +64,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public List<OrderItem> getOrderItems() {
+    public List<BillItemDTO> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
+    public void setOrderItems(List<BillItemDTO> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -98,7 +98,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "BillDTO{" +
                 "orderId='" + orderId + '\'' +
                 ", orderItems=" + orderItems +
                 ", totalAmount=" + totalAmount +
