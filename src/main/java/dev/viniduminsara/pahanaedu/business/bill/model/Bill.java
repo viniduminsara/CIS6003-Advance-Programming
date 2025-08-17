@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Bill {
 
-    private String orderId;
+    private String billId;
     private List<BillItem> billItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
     private Bill(Builder builder) {
-        this.orderId = builder.orderId;
+        this.billId = builder.billId;
         this.billItems = builder.billItems;
         this.totalAmount = builder.totalAmount;
         this.customerId = builder.customerId;
@@ -20,14 +20,14 @@ public class Bill {
     }
 
     public static class Builder {
-        private String orderId;
+        private String billId;
         private List<BillItem> billItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
 
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
+        public Builder orderId(String billId) {
+            this.billId = billId;
             return this;
         }
 
@@ -56,19 +56,19 @@ public class Bill {
         }
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getBillId() {
+        return billId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setBillId(String billId) {
+        this.billId = billId;
     }
 
-    public List<BillItem> getOrderItems() {
+    public List<BillItem> getBillItems() {
         return billItems;
     }
 
-    public void setOrderItems(List<BillItem> billItems) {
+    public void setBillItems(List<BillItem> billItems) {
         this.billItems = billItems;
     }
 
@@ -99,7 +99,7 @@ public class Bill {
     @Override
     public String toString() {
         return "Bill{" +
-                "orderId='" + orderId + '\'' +
+                "orderId='" + billId + '\'' +
                 ", orderItems=" + billItems +
                 ", totalAmount=" + totalAmount +
                 ", customerId='" + customerId + '\'' +
