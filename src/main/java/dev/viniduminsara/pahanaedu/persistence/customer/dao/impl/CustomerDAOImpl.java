@@ -13,10 +13,10 @@ import java.util.List;
 public class CustomerDAOImpl implements CustomerDAO {
     
     @Override
-    public void save(Customer customer) {
-try (
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.INSERT)
+    public boolean save(Customer customer) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.INSERT)
         ) {
             pstm.setString(1, customer.getCustomerId());
             pstm.setString(2, customer.getName());
@@ -27,8 +27,10 @@ try (
             pstm.setString(7, customer.getEmail());
 
             pstm.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -68,7 +70,7 @@ try (
     }
 
     @Override
-    public void update(String id, Customer customer) {
+    public boolean update(String id, Customer customer) {
         try (
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.UPDATE)
@@ -80,21 +82,25 @@ try (
             pstm.setString(5, id);
 
             pstm.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(String id) {
+    public boolean delete(String id) {
         try (
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.DELETE)
         ) {
             pstm.setString(1, id);
             pstm.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -113,5 +119,45 @@ try (
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public boolean checkEmailExists(String email) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.EXISTS_BY_EMAIL)
+        ) {
+            pstm.setString(1, email);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean checkMobileNumberExists(String mobileNumber) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.EXISTS_BY_MOBILE_NUMBER)
+        ) {
+            pstm.setString(1, mobileNumber);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
