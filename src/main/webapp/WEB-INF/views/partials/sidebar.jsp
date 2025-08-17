@@ -37,7 +37,7 @@
             <a href="<%= request.getContextPath() %>/bill" class="flex items-center p-3 rounded-lg transition-all
             <%= request.getRequestURI().equals(request.getContextPath() + "/bill") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
-                <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
+                <i class="fa-solid fa-receipt mr-3 text-lg"></i>
                 Bills Overview
             </a>
         </li>

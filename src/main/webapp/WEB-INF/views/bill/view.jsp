@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-         import="java.util.*, dev.viniduminsara.pahanaedu.business.customer.dto.CustomerDTO" %>
+         import="java.util.*" %>
 <%@ page import="dev.viniduminsara.pahanaedu.business.bill.dto.BillDTO" %>
 
 <div class="flex justify-between items-center mb-6">
@@ -22,6 +22,7 @@
                     <th>Bill Date</th>
                     <th>Customer Id</th>
                     <th>Total Amount</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,10 +38,15 @@
                     for (BillDTO bill : billList) {
                 %>
                 <tr>
-                    <td><%= bill.getOrderId() %></td>
+                    <td><%= bill.getBillId() %></td>
                     <td><%= bill.getDate() %></td>
                     <td><%= bill.getCustomerId() %></td>
                     <td><%= bill.getTotalAmount() %></td>
+                    <td>
+                        <a href="<%= request.getContextPath() %>/bill/generate?id=<%= bill.getBillId() %>" class="btn btn-primary btn-outline">
+                            View Invoice
+                        </a>
+                    </td>
                 </tr>
                 <%
                         }
