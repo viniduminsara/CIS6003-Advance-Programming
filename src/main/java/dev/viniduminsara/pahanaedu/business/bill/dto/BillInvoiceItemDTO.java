@@ -1,23 +1,31 @@
 package dev.viniduminsara.pahanaedu.business.bill.dto;
 
-public class BillItemDTO {
+public class BillInvoiceItemDTO {
     private String itemCode;
+    private String itemName;
     private Integer quantity;
     private Double unitPrice;
 
-    private BillItemDTO(Builder builder) {
+    private BillInvoiceItemDTO(Builder builder) {
         this.itemCode = builder.itemCode;
+        this.itemName = builder.itemName;
         this.quantity = builder.quantity;
         this.unitPrice = builder.unitPrice;
     }
 
     public static class Builder {
         private String itemCode;
+        private String itemName;
         private Integer quantity;
         private Double unitPrice;
 
         public Builder itemCode(String itemCode) {
             this.itemCode = itemCode;
+            return this;
+        }
+
+        public Builder itemName(String itemName) {
+            this.itemName = itemName;
             return this;
         }
 
@@ -31,8 +39,8 @@ public class BillItemDTO {
             return this;
         }
 
-        public BillItemDTO build() {
-            return new BillItemDTO(this);
+        public BillInvoiceItemDTO build() {
+            return new BillInvoiceItemDTO(this);
         }
     }
 
@@ -42,6 +50,14 @@ public class BillItemDTO {
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public Integer getQuantity() {
@@ -62,7 +78,7 @@ public class BillItemDTO {
 
     @Override
     public String toString() {
-        return "BillItemDTO{" +
+        return "BillInvoiceItemDTO{" +
                 "itemCode='" + itemCode + '\'' +
                 ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +

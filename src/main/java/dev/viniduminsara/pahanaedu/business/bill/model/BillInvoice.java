@@ -1,17 +1,17 @@
-package dev.viniduminsara.pahanaedu.business.bill.dto;
+package dev.viniduminsara.pahanaedu.business.bill.model;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class BillDTO {
+public class BillInvoice {
 
     private String billId;
-    private List<BillItemDTO> billItems;
+    private List<BillInvoiceItem> billItems;
     private Double totalAmount;
     private String customerId;
     private LocalDate date;
 
-    private BillDTO(Builder builder) {
+    private BillInvoice(Builder builder) {
         this.billId = builder.billId;
         this.billItems = builder.billItems;
         this.totalAmount = builder.totalAmount;
@@ -21,18 +21,18 @@ public class BillDTO {
 
     public static class Builder {
         private String billId;
-        private List<BillItemDTO> billItems;
+        private List<BillInvoiceItem> billItems;
         private Double totalAmount;
         private String customerId;
         private LocalDate date;
 
-        public Builder billId(String orderId) {
-            this.billId = orderId;
+        public Builder orderId(String billId) {
+            this.billId = billId;
             return this;
         }
 
-        public Builder billItems(List<BillItemDTO> orderItems) {
-            this.billItems = orderItems;
+        public Builder orderItems(List<BillInvoiceItem> billItems) {
+            this.billItems = billItems;
             return this;
         }
 
@@ -51,8 +51,8 @@ public class BillDTO {
             return this;
         }
 
-        public BillDTO build() {
-            return new BillDTO(this);
+        public BillInvoice build() {
+            return new BillInvoice(this);
         }
     }
 
@@ -64,11 +64,11 @@ public class BillDTO {
         this.billId = billId;
     }
 
-    public List<BillItemDTO> getBillItems() {
+    public List<BillInvoiceItem> getBillItems() {
         return billItems;
     }
 
-    public void setBillItems(List<BillItemDTO> billItems) {
+    public void setBillItems(List<BillInvoiceItem> billItems) {
         this.billItems = billItems;
     }
 
@@ -98,7 +98,7 @@ public class BillDTO {
 
     @Override
     public String toString() {
-        return "BillDTO{" +
+        return "BillInvoice{" +
                 "orderId='" + billId + '\'' +
                 ", orderItems=" + billItems +
                 ", totalAmount=" + totalAmount +

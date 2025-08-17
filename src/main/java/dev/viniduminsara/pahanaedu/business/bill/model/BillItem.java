@@ -63,7 +63,7 @@ public class BillItem {
 
     @Override
     public String toString() {
-        return "OrderItem{" +
+        return "BillItem{" +
                 "itemCode='" + itemCode + '\'' +
                 ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +
