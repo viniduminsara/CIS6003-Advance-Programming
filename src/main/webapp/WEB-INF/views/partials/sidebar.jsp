@@ -30,7 +30,7 @@
             <%= request.getRequestURI().equals(request.getContextPath() + "/bill/create") ? "text-primary" : "" %>
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-cart-shopping mr-3 text-lg"></i>
-                Create Bill
+                Billing
             </a>
         </li>
         <li>
@@ -39,6 +39,14 @@
                 focus:text-primary active:text-primary">
                 <i class="fa-solid fa-receipt mr-3 text-lg"></i>
                 Bills Overview
+            </a>
+        </li>
+        <li>
+            <a href="<%= request.getContextPath() %>/help" class="flex items-center p-3 rounded-lg transition-all
+            <%= request.getRequestURI().equals(request.getContextPath() + "/help") ? "text-primary" : "" %>
+                focus:text-primary active:text-primary">
+                <i class="fa-solid fa-circle-question mr-3 text-lg"></i>
+                Help
             </a>
         </li>
     </ul>
