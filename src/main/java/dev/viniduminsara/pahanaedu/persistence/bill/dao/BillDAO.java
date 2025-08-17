@@ -1,6 +1,7 @@
-package dev.viniduminsara.pahanaedu.persistence.order.dao;
+package dev.viniduminsara.pahanaedu.persistence.bill.dao;
 
 import dev.viniduminsara.pahanaedu.business.bill.model.Bill;
+import dev.viniduminsara.pahanaedu.business.bill.model.BillInvoice;
 
 import java.util.List;
 
@@ -11,5 +12,7 @@ public interface BillDAO {
     int getCount();
 
     List<Bill> findAll();
+
+    BillInvoice findById(String billId);
 
 }

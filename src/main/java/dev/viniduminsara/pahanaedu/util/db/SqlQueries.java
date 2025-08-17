@@ -63,11 +63,20 @@ public class SqlQueries {
 
         public static final String FIND_ALL =
             "SELECT * FROM bill";
+
+        public static final String FIND_BY_ID =
+            "SELECT * FROM bill WHERE bill_id = ?";
     }
 
     public static final class BillItem {
         public static final String INSERT =
                 "INSERT INTO bill_item (bill_id, item_code, quantity, unit_price) VALUES (?, ?, ?, ?)";
+
+        public static final String FIND_BY_ID_FOR_INVOICE =
+            "SELECT bi.item_code, i.item_name, bi.quantity, bi.unit_price " +
+            "FROM bill_item bi " +
+            "JOIN item i ON bi.item_code = i.item_code " +
+            "WHERE bi.bill_id = ?";
     }
 
     public static final class User {

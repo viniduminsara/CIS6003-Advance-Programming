@@ -1,8 +1,10 @@
-package dev.viniduminsara.pahanaedu.persistence.order.dao.impl;
+package dev.viniduminsara.pahanaedu.persistence.bill.dao.impl;
 
 import dev.viniduminsara.pahanaedu.business.bill.model.Bill;
+import dev.viniduminsara.pahanaedu.business.bill.model.BillInvoice;
+import dev.viniduminsara.pahanaedu.business.bill.model.BillInvoiceItem;
 import dev.viniduminsara.pahanaedu.business.bill.model.BillItem;
-import dev.viniduminsara.pahanaedu.persistence.order.dao.BillDAO;
+import dev.viniduminsara.pahanaedu.persistence.bill.dao.BillDAO;
 import dev.viniduminsara.pahanaedu.util.db.DBConnection;
 import dev.viniduminsara.pahanaedu.util.db.SqlQueries;
 
@@ -24,23 +26,23 @@ public class BillDAOImpl implements BillDAO {
             connection = DBConnection.getInstance().getConnection();
             connection.setAutoCommit(false); // Start transaction
 
-            // Insert order into `orders` table
+            // Insert order into bill table
             orderPstm = connection.prepareStatement(SqlQueries.Bill.INSERT);
-            orderPstm.setString(1, bill.getOrderId());
+            orderPstm.setString(1, bill.getBillId());
             orderPstm.setDate(2, Date.valueOf(bill.getDate()));
             orderPstm.setString(3, bill.getCustomerId());
             orderPstm.setDouble(4, bill.getTotalAmount());
             orderPstm.executeUpdate();
 
-            // Insert order items into `order_item` table
+            // Insert order items into bill_item table
             orderItemPstm = connection.prepareStatement(SqlQueries.BillItem.INSERT);
 
             // Prepare stock update statement
             updateStockPstm = connection.prepareStatement(SqlQueries.Item.UPDATE_STOCK);
 
             int totalUnits = 0;
-            for (BillItem item : bill.getOrderItems()) {
-                orderItemPstm.setString(1, bill.getOrderId());
+            for (BillItem item : bill.getBillItems()) {
+                orderItemPstm.setString(1, bill.getBillId());
                 orderItemPstm.setString(2, item.getItemCode());
                 orderItemPstm.setInt(3, item.getQuantity());
                 orderItemPstm.setDouble(4, item.getUnitPrice());
@@ -125,5 +127,49 @@ public class BillDAOImpl implements BillDAO {
             e.printStackTrace();
         }
         return bills;
+    }
+
+    @Override
+    public BillInvoice findById(String billId) {
+        BillInvoice bill = null;
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstmBill = connection.prepareStatement(SqlQueries.Bill.FIND_BY_ID);
+            PreparedStatement pstmItems = connection.prepareStatement(SqlQueries.BillItem.FIND_BY_ID_FOR_INVOICE)
+        ) {
+            //Fetch bill details
+            pstmBill.setString(1, billId);
+            try (ResultSet rs = pstmBill.executeQuery()) {
+                if (rs.next()) {
+                    bill = new BillInvoice.Builder()
+                            .orderId(rs.getString("bill_id"))
+                            .date(rs.getDate("bill_date").toLocalDate())
+                            .customerId(rs.getString("customer_id"))
+                            .totalAmount(rs.getDouble("total_amount"))
+                            .build();
+                }
+            }
+
+            //Fetch related items only if bill exists
+            if (bill != null) {
+                List<BillInvoiceItem> items = new ArrayList<>();
+                pstmItems.setString(1, billId);
+                try (ResultSet rs = pstmItems.executeQuery()) {
+                    while (rs.next()) {
+                        items.add(new BillInvoiceItem.Builder()
+                                .itemCode(rs.getString("item_code"))
+                                .itemName(rs.getString("item_name"))
+                                .quantity(rs.getInt("quantity"))
+                                .unitPrice(rs.getDouble("unit_price"))
+                                .build());
+                    }
+                }
+                bill.setBillItems(items);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bill;
     }
 }
