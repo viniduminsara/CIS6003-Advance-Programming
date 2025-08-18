@@ -50,7 +50,7 @@
                             <a href="<%= request.getContextPath() %>/item/edit?code=<%= item.getItemCode() %>"
                                class="btn btn-sm btn-primary btn-outline"
                             >Edit</a>
-                            <form method="post" action="<%= request.getContextPath() %>/item/delete?code=<%= item.getItemCode() %>" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <form method="post" action="<%= request.getContextPath() %>/item/delete?code=<%= item.getItemCode() %>" onsubmit="return confirmItemDelete(event);">
                                 <button type="submit" class="btn btn-sm btn-secondary btn-outline">Delete</button>
                             </form>
                         </div>
@@ -67,3 +67,24 @@
 </div>
 
 <%@ include file="../item/add-item-modal.jsp" %>
+
+<script>
+    function confirmItemDelete(event) {
+        const form = event.target;
+
+        Swal.fire({
+            title: "Are you sure you want to delete this item?",
+            icon: "warning",
+            theme: 'dark',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>

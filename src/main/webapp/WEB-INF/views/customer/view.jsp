@@ -38,17 +38,24 @@
                     for (CustomerDTO customer : customers) {
                 %>
                 <tr>
-                    <td><%= customer.getName() %></td>
-                    <td><%= customer.getMobileNumber() %></td>
-                    <td><%= customer.getUnitsConsumed() %></td>
-                    <td><%= customer.getEmail() %></td>
-                    <td><%= customer.getRegistrationDate() %></td>
+                    <td><%= customer.getName() %>
+                    </td>
+                    <td><%= customer.getMobileNumber() %>
+                    </td>
+                    <td><%= customer.getUnitsConsumed() %>
+                    </td>
+                    <td><%= customer.getEmail() %>
+                    </td>
+                    <td><%= customer.getRegistrationDate() %>
+                    </td>
                     <td>
                         <div class="flex space-x-2">
                             <a href="<%= request.getContextPath() %>/customer/edit?id=<%= customer.getCustomerId() %>"
                                class="btn btn-sm btn-primary btn-outline"
                             >Edit</a>
-                            <form method="post" action="<%= request.getContextPath() %>/customer/delete?id=<%= customer.getCustomerId() %>" onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                            <form method="post"
+                                  action="<%= request.getContextPath() %>/customer/delete?id=<%= customer.getCustomerId() %>"
+                                  onsubmit="return confirmCustomerDelete(event)">
                                 <button type="submit" class="btn btn-sm btn-secondary btn-outline">Delete</button>
                             </form>
                         </div>
@@ -65,3 +72,24 @@
 </div>
 
 <%@ include file="../customer/add-customer-modal.jsp" %>
+
+<script>
+    function confirmCustomerDelete(event) {
+        const form = event.target;
+
+        Swal.fire({
+            title: "Are you sure you want to delete this customer?",
+            icon: "warning",
+            theme: 'dark',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>

@@ -7,22 +7,35 @@
     session.removeAttribute("flash_warning");
 %>
 
-<div class="toast">
-    <div class="w-full max-w-xl">
-        <% if (successMsg != null) { %>
-        <div class="alert alert-success alert-soft shadow-lg mb-4">
-            <span><%= successMsg %></span>
-        </div>
-        <% } %>
-        <% if (errorMsg != null) { %>
-        <div class="alert alert-error alert-soft shadow-lg mb-4">
-            <span><%= errorMsg %></span>
-        </div>
-        <% } %>
-        <% if (warningMsg != null) { %>
-        <div class="alert alert-warning alert-soft shadow-lg mb-4">
-            <span><%= warningMsg %></span>
-        </div>
-        <% } %>
-    </div>
-</div>
+<script>
+    <% if (successMsg != null) { %>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '<%= successMsg %>',
+            showConfirmButton: false,
+            timer: 2000,
+            theme: 'dark'
+        });
+    <% } %>
+
+    <% if (errorMsg != null) { %>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<%= errorMsg %>',
+            showConfirmButton: true,
+            theme: 'dark'
+        });
+    <% } %>
+
+    <% if (warningMsg != null) { %>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: '<%= warningMsg %>',
+            showConfirmButton: true,
+            theme: 'dark'
+        });
+    <% } %>
+</script>
