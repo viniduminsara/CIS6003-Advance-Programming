@@ -1,0 +1,163 @@
+package dev.viniduminsara.pahanaedu.persistence.customer.dao.impl;
+
+import dev.viniduminsara.pahanaedu.business.customer.mapper.CustomerMapper;
+import dev.viniduminsara.pahanaedu.business.customer.model.Customer;
+import dev.viniduminsara.pahanaedu.persistence.customer.dao.CustomerDAO;
+import dev.viniduminsara.pahanaedu.util.db.DBConnection;
+import dev.viniduminsara.pahanaedu.util.db.SqlQueries;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomerDAOImpl implements CustomerDAO {
+    
+    @Override
+    public boolean save(Customer customer) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.INSERT)
+        ) {
+            pstm.setString(1, customer.getCustomerId());
+            pstm.setString(2, customer.getName());
+            pstm.setString(3, customer.getAddress());
+            pstm.setString(4, customer.getMobileNumber());
+            pstm.setInt(5, customer.getUnitsConsumed());
+            pstm.setDate(6, Date.valueOf(customer.getRegistrationDate()));
+            pstm.setString(7, customer.getEmail());
+
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Customer findById(String id) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.FIND_BY_ID)
+        ) {
+            pstm.setString(1, id);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return CustomerMapper.mapToCustomer(rs);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        List<Customer> customers = new ArrayList<>();
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.FIND_ALL);
+            ResultSet rs = pstm.executeQuery()
+        ) {
+            while (rs.next()) {
+                customers.add(CustomerMapper.mapToCustomer(rs));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
+    @Override
+    public boolean update(String id, Customer customer) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.UPDATE)
+        ) {
+            pstm.setString(1, customer.getName());
+            pstm.setString(2, customer.getAddress());
+            pstm.setString(3, customer.getMobileNumber());
+            pstm.setString(4, customer.getEmail());
+            pstm.setString(5, id);
+
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(String id) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.DELETE)
+        ) {
+            pstm.setString(1, id);
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public int getCount() {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.COUNT)
+        ) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean checkEmailExists(String email) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.EXISTS_BY_EMAIL)
+        ) {
+            pstm.setString(1, email);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean checkMobileNumberExists(String mobileNumber) {
+        try (
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement(SqlQueries.Customer.EXISTS_BY_MOBILE_NUMBER)
+        ) {
+            pstm.setString(1, mobileNumber);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+}
